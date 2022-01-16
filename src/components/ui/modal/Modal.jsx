@@ -1,10 +1,13 @@
 import React from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { styled } from '@mui/system';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import modalStyles from './Modal.style';
+import popinAddWine from '../../../img/popin_ajout_vin.svg';
+import arrow from '../../../img/arrow.svg';
+import Typography from '../typography/Typography';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -41,6 +44,10 @@ const Modal = ({ open, handleClose }) => {
       BackdropComponent={Backdrop}
     >
       <Box className={classes.root}>
+        <div className={classes.header}>
+          <img src={popinAddWine} alt="decoration haut de la modale" />
+        </div>
+
         <Box className={classes.content}>
           <button
             type="button"
@@ -50,9 +57,31 @@ const Modal = ({ open, handleClose }) => {
             <CloseIcon sx={{ fontSize: '20px' }} />
           </button>
 
-          <Typography variant="p" component="div">
+          <Typography
+            className="h2"
+            variant="h2"
+            component="div"
+            sx={{
+              mt: '60px',
+              textAlign: 'center',
+              zIndex: 50,
+              mb: '22px',
+            }}
+          >
             Content of the modal
           </Typography>
+
+          <Box className={classes.description}>
+            <Typography className="root" variant="subtitle1" component="div">
+              <span style={{ marginRight: '5px' }}>
+                <img src={arrow} alt="decoration description" />
+              </span>
+              Ajouter un vin vous permet de renseigner d&apos;une manière très
+              générale les informations immuables d&apos;un millésime à
+              l&apos;autre. Vous pourrez ensuite ajouter ses millésimes avec un
+              niveau de précision beaucoup plus élevé.
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </StyledModal>
