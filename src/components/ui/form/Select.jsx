@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { TextField, Autocomplete as AutocompleteMUI } from '@mui/material';
 import { selectStyles } from './Form.style';
 
-const Select = ({ label, required, options, handleChange }) => {
+const Select = ({ label, required, options, handleChange, disabled }) => {
   const classes = selectStyles();
 
   return (
@@ -18,6 +18,7 @@ const Select = ({ label, required, options, handleChange }) => {
         <TextField {...params} required={required} label={label} />
       )}
       onChange={handleChange}
+      disabled={disabled}
     />
   );
 };
@@ -31,6 +32,7 @@ Select.propTypes = {
   required: PropTypes.bool,
   options: PropTypes.arrayOf(PropTypes.any).isRequired,
   handleChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default Select;

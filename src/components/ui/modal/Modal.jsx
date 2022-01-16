@@ -1,8 +1,16 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable object-curly-newline */
 import React, { useEffect, useState } from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { styled } from '@mui/system';
-import { Box, FormControl, FormLabel, Grid, RadioGroup } from '@mui/material';
+import {
+  Alert,
+  Box,
+  FormControl,
+  FormLabel,
+  Grid,
+  RadioGroup,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import CloseIcon from '@mui/icons-material/Close';
 import modalStyles from './Modal.style';
@@ -52,17 +60,20 @@ const Backdrop = styled('div')`
 
 const Modal = ({ open, handleClose }) => {
   const classes = modalStyles();
-  const [formButtonIsDisabled] = useState(true);
 
   const [labelsOptions, setLabelsOptions] = useState([]);
   const [colorsOptions, setColorsOptions] = useState([]);
   const [typesOptions, setTypesOptions] = useState([]);
   const [sucrositesOptions, setSucrositesOptions] = useState([]);
 
+  const [formDataName, setFormDataName] = useState('');
   const [formDataLabel, setFormDataLabel] = useState('');
   const [formDataColor, setFormDataColor] = useState('');
   const [formDataType, setFormDataType] = useState('');
   const [formDataSucrosite, setFormDataSucrosite] = useState('');
+  const [formDataRang, setFormDataRang] = useState('');
+
+  const handleChangeRadio = (e) => setFormDataRang(e.target.value);
 
   useEffect(() => {
     setLabelsOptions(getLabels());
@@ -79,14 +90,6 @@ const Modal = ({ open, handleClose }) => {
       setSucrositesOptions(getSucrositesByLabel(formDataLabel));
     }
   }, [formDataLabel]);
-
-  console.log(
-    formDataLabel,
-    formDataColor,
-    formDataType,
-    sucrositesOptions,
-    formDataSucrosite,
-  );
 
   return (
     <StyledModal
@@ -147,7 +150,15 @@ const Modal = ({ open, handleClose }) => {
                   id="outlined-helperText"
                   label="Nom du vin"
                   defaultValue=""
+                  handleChange={(e) => {
+                    setFormDataName(e.target.value);
+                  }}
                 />
+                {formDataName.length > 25 && (
+                  <Alert severity="error">
+                    Le champs doit contenir entre 1 et 25 caractères.
+                  </Alert>
+                )}
               </Grid>
 
               <Grid item xs={12} sm={6}>
@@ -158,6 +169,7 @@ const Modal = ({ open, handleClose }) => {
                   handleChange={(_, newValue) => {
                     setFormDataLabel(newValue);
                   }}
+                  disabled={formDataName.length < 1 || formDataName.length > 25}
                 />
               </Grid>
 
@@ -169,6 +181,7 @@ const Modal = ({ open, handleClose }) => {
                   handleChange={(_, newValue) => {
                     setFormDataColor(newValue);
                   }}
+                  disabled={!formDataLabel}
                 />
               </Grid>
 
@@ -180,6 +193,7 @@ const Modal = ({ open, handleClose }) => {
                   handleChange={(_, newValue) => {
                     setFormDataType(newValue);
                   }}
+                  disabled={!formDataColor}
                 />
               </Grid>
 
@@ -191,6 +205,7 @@ const Modal = ({ open, handleClose }) => {
                   handleChange={(_, newValue) => {
                     setFormDataSucrosite(newValue);
                   }}
+                  disabled={!formDataType}
                 />
               </Grid>
 
@@ -207,9 +222,22 @@ const Modal = ({ open, handleClose }) => {
                     aria-label="gender"
                     name="row-radio-buttons-group"
                   >
-                    <Radio value="female" label="Premier vin" disabled />
-                    <Radio value="male" label="Second vin" />
-                    <Radio value="disabled" label="Autre vin" />
+                    <Radio
+                      value="premier vin"
+                      label="Premier vin"
+                      disabled
+                      handleChange={handleChangeRadio}
+                    />
+                    <Radio
+                      value="second vin"
+                      label="Second vin"
+                      handleChange={handleChangeRadio}
+                    />
+                    <Radio
+                      value="autre vin"
+                      label="Autre vin"
+                      handleChange={handleChangeRadio}
+                    />
                   </RadioGroup>
                 </FormControl>
               </Grid>
@@ -228,7 +256,14 @@ const Modal = ({ open, handleClose }) => {
                   <Button
                     handleClick={() => {}}
                     style={{ marginTop: '9px' }}
-                    disabled={formButtonIsDisabled}
+                    disabled={
+                      !formDataName ||
+                      !formDataLabel ||
+                      !formDataColor ||
+                      !formDataType ||
+                      !formDataSucrosite ||
+                      !formDataRang
+                    }
                   >
                     Suivant
                   </Button>
