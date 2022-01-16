@@ -1,5 +1,5 @@
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalUnstyled from '@mui/base/ModalUnstyled';
 import { styled } from '@mui/system';
 import { Box, FormControl, FormLabel, Grid, RadioGroup } from '@mui/material';
@@ -13,6 +13,12 @@ import TextField from '../form/TextField';
 import Select from '../form/Select';
 import Radio from '../form/Radio';
 import Button from '../button/Button';
+import {
+  getLabels,
+  getColorsByLabel,
+  getTypesByLabel,
+  getSucrositesByLabel,
+} from '../../../utils';
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -47,6 +53,40 @@ const Backdrop = styled('div')`
 const Modal = ({ open, handleClose }) => {
   const classes = modalStyles();
   const [formButtonIsDisabled] = useState(true);
+
+  const [labelsOptions, setLabelsOptions] = useState([]);
+  const [colorsOptions, setColorsOptions] = useState([]);
+  const [typesOptions, setTypesOptions] = useState([]);
+  const [sucrositesOptions, setSucrositesOptions] = useState([]);
+
+  const [formDataLabel, setFormDataLabel] = useState('');
+  const [formDataColor, setFormDataColor] = useState('');
+  const [formDataType, setFormDataType] = useState('');
+  const [formDataSucrosite, setFormDataSucrosite] = useState('');
+
+  useEffect(() => {
+    setLabelsOptions(getLabels());
+
+    if (formDataLabel !== '') {
+      setColorsOptions(getColorsByLabel(formDataLabel));
+    }
+
+    if (formDataLabel !== '') {
+      setTypesOptions(getTypesByLabel(formDataLabel));
+    }
+
+    if (formDataLabel !== '') {
+      setSucrositesOptions(getSucrositesByLabel(formDataLabel));
+    }
+  }, [formDataLabel]);
+
+  console.log(
+    formDataLabel,
+    formDataColor,
+    formDataType,
+    sucrositesOptions,
+    formDataSucrosite,
+  );
 
   return (
     <StyledModal
@@ -114,7 +154,10 @@ const Modal = ({ open, handleClose }) => {
                 <Select
                   required
                   label="Appellation"
-                  options={['Option 1', 'Option 2']}
+                  options={labelsOptions}
+                  handleChange={(_, newValue) => {
+                    setFormDataLabel(newValue);
+                  }}
                 />
               </Grid>
 
@@ -122,7 +165,10 @@ const Modal = ({ open, handleClose }) => {
                 <Select
                   required
                   label="couleur"
-                  options={['Option 1', 'Option 2']}
+                  options={colorsOptions}
+                  handleChange={(_, newValue) => {
+                    setFormDataColor(newValue);
+                  }}
                 />
               </Grid>
 
@@ -130,7 +176,10 @@ const Modal = ({ open, handleClose }) => {
                 <Select
                   required
                   label="Type"
-                  options={['Option 1', 'Option 2']}
+                  options={typesOptions}
+                  handleChange={(_, newValue) => {
+                    setFormDataType(newValue);
+                  }}
                 />
               </Grid>
 
@@ -138,7 +187,10 @@ const Modal = ({ open, handleClose }) => {
                 <Select
                   required
                   label="Sucrosité"
-                  options={['Option 1', 'Option 2']}
+                  options={sucrositesOptions}
+                  handleChange={(_, newValue) => {
+                    setFormDataSucrosite(newValue);
+                  }}
                 />
               </Grid>
 
