@@ -1,11 +1,11 @@
 import { makeStyles } from '@mui/styles';
 import bgModal from '../../../img/bg-modal.svg';
 
-const modalStyles = makeStyles({
+const modalStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
     background: 'transparent',
-    width: '80%',
+    width: '90%',
     maxWidth: '712px',
   },
   header: {
@@ -38,7 +38,10 @@ const modalStyles = makeStyles({
   description: {
     background: '#FCF6F6',
     borderRadius: '10px',
-    padding: '19px 36px',
+    padding: '5px',
+    [theme.breakpoints.up('sm')]: {
+      padding: '19px 36px',
+    },
   },
   form: {
     marginTop: '13px',
@@ -53,6 +56,19 @@ const modalStyles = makeStyles({
     lineHeight: '21px',
     color: '#9F8D93',
   },
-});
+  formBottom: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+
+    [theme.breakpoints.up('sm')]: {
+      paddingRight: '24px',
+
+      '& button': {
+        marginRight: '14px',
+      },
+    },
+  },
+}));
 
 export default modalStyles;

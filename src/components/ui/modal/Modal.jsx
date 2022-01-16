@@ -22,8 +22,15 @@ const StyledModal = styled(ModalUnstyled)`
   top: 0;
   left: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  margin: 10px 0;
+  max-height: calc(100vh - (2 * 10px));
+  overflow-y: scroll;
+
+  ${(props) => props.theme.breakpoints.up('sm')} {
+    align-items: center;
+  }
 `;
 
 const Backdrop = styled('div')`
@@ -95,7 +102,7 @@ const Modal = ({ open, handleClose }) => {
               columnSpacing={{ xs: '33px', sm: '33px', md: '33px' }}
               rowSpacing="10px"
             >
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   id="outlined-helperText"
                   label="Nom du vin"
@@ -103,7 +110,7 @@ const Modal = ({ open, handleClose }) => {
                 />
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <Select
                   required
                   label="Appellation"
@@ -111,32 +118,28 @@ const Modal = ({ open, handleClose }) => {
                 />
               </Grid>
 
-              <Grid container item spacing={4} xs={6}>
-                <Grid item xs={6}>
-                  <Select
-                    required
-                    label="couleur"
-                    options={['Option 1', 'Option 2']}
-                  />
-                </Grid>
-
-                <Grid item xs={6}>
-                  <Select
-                    required
-                    label="Type"
-                    options={['Option 1', 'Option 2']}
-                  />
-                </Grid>
+              <Grid item xs={12} sm={3}>
+                <Select
+                  required
+                  label="couleur"
+                  options={['Option 1', 'Option 2']}
+                />
               </Grid>
 
-              <Grid item xs={6}>
-                <Grid item xs={6}>
-                  <Select
-                    required
-                    label="Sucrosité"
-                    options={['Option 1', 'Option 2']}
-                  />
-                </Grid>
+              <Grid item xs={12} sm={3}>
+                <Select
+                  required
+                  label="Type"
+                  options={['Option 1', 'Option 2']}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={3}>
+                <Select
+                  required
+                  label="Sucrosité"
+                  options={['Option 1', 'Option 2']}
+                />
               </Grid>
 
               <Grid item xs={12} style={{ paddingTop: '13px' }}>
@@ -160,14 +163,7 @@ const Modal = ({ open, handleClose }) => {
               </Grid>
 
               <Grid item xs={12} style={{ paddingTop: '25px' }}>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-end',
-                    paddingRight: '24px',
-                  }}
-                >
+                <div className={classes.formBottom}>
                   <Typography
                     className="info"
                     variant="subtitle1"
@@ -179,7 +175,7 @@ const Modal = ({ open, handleClose }) => {
 
                   <Button
                     handleClick={() => {}}
-                    style={{ marginRight: '14px', marginTop: '9px' }}
+                    style={{ marginTop: '9px' }}
                     disabled={formButtonIsDisabled}
                   >
                     Suivant

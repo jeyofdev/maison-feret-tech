@@ -27,6 +27,7 @@ const typographyStyles = makeStyles({
     fontSize: '10px',
     lineHeight: '21px',
     color: '#9F8D93',
+    textAlign: 'right',
   },
 });
 
