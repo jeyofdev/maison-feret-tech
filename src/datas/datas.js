@@ -7,14 +7,14 @@ const appelations = [
     sucrosites: ['Sec', 'Moelleux', 'Liquoreux'],
   },
   {
-    id: 1,
+    id: 2,
     label: 'Sauternes',
     colors: ['Blanc'],
     types: ['tranquille'],
     sucrosites: ['Liquoreux'],
   },
   {
-    id: 1,
+    id: 3,
     label: 'Bordeaux',
     colors: ['Rouge', 'Blanc', 'Rosé'],
     types: ['tranquille'],
