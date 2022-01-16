@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles';
+import bgModal from '../../../img/bg-modal.svg';
 
 const modalStyles = makeStyles({
   root: {
@@ -17,7 +18,10 @@ const modalStyles = makeStyles({
   content: {
     position: 'relative',
     marginTop: '30px',
-    background: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
+    backgroundImage: `url(${bgModal})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'bottom left',
     boxShadow: '0px 4px 76px 4px rgba(0, 0, 0, 0.08)',
     borderRadius: '10px',
     padding: '14px 27px 23px 18px',
@@ -35,6 +39,19 @@ const modalStyles = makeStyles({
     background: '#FCF6F6',
     borderRadius: '10px',
     padding: '19px 36px',
+  },
+  form: {
+    marginTop: '13px',
+    flexGrow: 1,
+    width: '100%',
+  },
+  labelRadiosGroup: {
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '10px',
+    lineHeight: '21px',
+    color: '#9F8D93',
   },
 });
 

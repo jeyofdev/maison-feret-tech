@@ -28,7 +28,7 @@ Typography.propTypes = {
   children: PropTypes.oneOfType([PropTypes.any]).isRequired,
   variant: PropTypes.string.isRequired,
   component: PropTypes.string.isRequired,
-  sx: PropTypes.objectOf(PropTypes.number),
+  sx: PropTypes.objectOf(PropTypes.any),
 };
 
 export default Typography;

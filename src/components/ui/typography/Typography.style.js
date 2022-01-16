@@ -19,6 +19,15 @@ const typographyStyles = makeStyles({
     lineHeight: '39px',
     color: '#000',
   },
+  info: {
+    position: 'relative',
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '10px',
+    lineHeight: '21px',
+    color: '#9F8D93',
+  },
 });
 
 export default typographyStyles;
